@@ -1,0 +1,6 @@
+# melos_managed_dependency_overrides: edge_dart_runtime
+dependency_overrides:
+  telegram_x:
+    path: ../telegram_x
+  telegram_x_scheme:
+    path: ../telegram_x_scheme
