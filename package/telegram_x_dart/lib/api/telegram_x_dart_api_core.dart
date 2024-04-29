@@ -35,15 +35,11 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 import 'dart:async';
 
 import 'package:general_lib/general_lib.dart';
-import 'package:telegram_x_dart/api/extensions.dart';
-import 'package:telegram_x_scheme/scheme/scheme/telegram_x_pubspec_config.dart';
-import 'package:telegram_x_scheme/scheme/scheme/pubspec_telegram_x.dart';
-import 'package:telegram_x_scheme/scheme/scheme/pubspec_telegram_x_dependencies.dart';
+
 import "package:path/path.dart" as path;
 import 'package:universal_io/io.dart';
 
 import "package:yaml/yaml.dart" as yaml;
-import 'package:yaml_writer/yaml_writer.dart';
 
 enum TelegramXDartBuildType {
   debug,
@@ -82,48 +78,7 @@ class TelegramXDartApi {
       });
       int exit_code = await (process.exitCode);
     }
-    Map yaml_code = (yaml.loadYaml(file_pubspec.readAsStringSync(), recover: true) as Map);
-    PubspecTelegramX pubspecTelegramX = PubspecTelegramX(yaml_code.clone());
-
-    File file_guide = File(path.join(directory_project.path, "guide-telegram_x.md"));
-
-    await file_guide.writeAsString(guide_telegram_x_markdown());
-    // supabase file script
-    File file_script_example = File(path.join(directory_project.path, "bin", "${project_name}_example.dart"));
-
-    if (!file_script_example.existsSync()) {
-      // await file_script_example.writeAsString(script_telegram_x_dart_native());
-    }
-
-    // supabase directory deploy
-    Directory directory_script_supabase = Directory(path.join(directory_project.path, "supabase", "functions", project_name));
-
-    // default configuration pubspec
-    PubspecTelegramX pubspecTelegramX_default = PubspecTelegramX.create(
-      repository: "https://github.com/azkadev/telegram_x",
-      homepage: "https://github.com/azkadev/telegram_x",
-      issue_tracker: "https://github.com/azkadev/telegram_x/issues",
-      documentation: "https://github.com/azkadev/telegram_x/tree/main/docs",
-      funding: [
-        "https://github.com/sponsors/azkadev",
-      ],
-      dependencies: PubspecTelegramXDependencies({
-        "telegram_x_dart": "any",
-        "telegram_x_dart_http_client": "any",
-        "general_lib": "^0.0.34",
-      }),
-      telegram_x: TelegramXPubspecConfig.create(),
-    );
-
-    // update pubspec default
-    pubspecTelegramX.rawData.telegram_x_dart_updateMapIfNotSameOrEmptyOrNull(
-      data: pubspecTelegramX_default.toJson(),
-      ignoreKeys: [
-        "@type",
-      ],
-    );
-    String yaml_documents_new = YamlWriter().write(pubspecTelegramX.toJson());
-    await file_pubspec.writeAsString(yaml_documents_new);
+    Map yaml_code = (yaml.loadYaml(file_pubspec.readAsStringSync(), recover: true) as Map); 
     // finished update pubspec
   }
 
@@ -157,7 +112,7 @@ class TelegramXDartApi {
       return;
     }
     Map yaml_code = (yaml.loadYaml(file_pubspec.readAsStringSync(), recover: true) as Map);
-    PubspecTelegramX pubspec_server_universe = PubspecTelegramX(yaml_code.clone());
+    
     Directory directory_script = Directory(path.join(directoryBase.path, "bin"));
     Directory directory_build = Directory(path.join(directoryBase.path, "build"));
     if (directory_build.existsSync() == false) {

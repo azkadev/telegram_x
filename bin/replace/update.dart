@@ -52,7 +52,7 @@ Future<void> pubspecUpdate({
     Map yaml_code_clone = yaml_code.clone();
 
     yaml_code_clone.addAll({
-      "description": "A sample command-line application.",
+      "description": "Telegram X Unofficial Port To Flutter With Telegram Client Tdlib Based Ultra FAST",
       "version": version_package,
       "repository": "https://github.com/azkadev/telegram_x",
       "homepage": "https://github.com/azkadev/telegram_x",
@@ -69,6 +69,13 @@ Future<void> pubspecUpdate({
         "web": null,
         "windows": null,
       },
+      "topics": [
+        "telegram",
+        "tdlib",
+        "telegram-x",
+        "telegram-client",
+        "dart",
+      ]
     });
 
     yaml_code_clone.removeByKeys([
@@ -82,10 +89,10 @@ Future<void> pubspecUpdate({
       });
       (yaml_code_clone["dependencies"] as Map).forEach((key, value) {
         if (key == "general_lib") {
-          yaml_code_clone["dependencies"][key] = "^0.0.36";
+          yaml_code_clone["dependencies"][key] = "^0.0.37";
         }
         if (key == "general_lib_flutter") {
-          yaml_code_clone["dependencies"][key] = "^0.0.19";
+          yaml_code_clone["dependencies"][key] = "^0.0.20";
         }
       });
     }
