@@ -25,3 +25,9 @@ platforms:
   macos: null
   web: null
   windows: null
+topics: 
+  - 'telegram'
+  - 'tdlib'
+  - 'telegram-x'
+  - 'telegram-client'
+  - 'dart'
